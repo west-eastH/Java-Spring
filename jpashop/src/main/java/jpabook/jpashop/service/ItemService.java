@@ -20,6 +20,16 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity) {
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+
+        //setter 말고 엔티티에 함수를 하나 만드는게 더 좋은 설계
+    }
+
     public List<Item> findItems() {
         return itemRepository.findAll();
     }
